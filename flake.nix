@@ -68,7 +68,7 @@
               (
                 source comfyui_env/bin/activate
                 set -x
-                pip install -r requirements_versions.txt
+                pip install -r requirements.txt
                 pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu128
               )
             fi
