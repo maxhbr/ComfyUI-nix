@@ -13,3 +13,6 @@
 [submodule "custom_nodes/Derfuu_ComfyUI_ModdedNodes"]
 	path = custom_nodes/Derfuu_ComfyUI_ModdedNodes
 	url = https://github.com/Derfuu/Derfuu_ComfyUI_ModdedNodes
+[submodule "custom_nodes/comfyui-job-iterator"]
+	path = custom_nodes/comfyui-job-iterator
+	url = https://github.com/ali1234/comfyui-job-iterator

@@ -16,70 +16,68 @@
         };
       in
       {
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            git gitRepo gnupg autoconf curl
-            procps gnumake util-linux m4 gperf unzip
-            cudatoolkit linuxPackages.nvidia_x11
-            libGLU libGL
-            xorg.libXi xorg.libXmu freeglut
-            xorg.libXext xorg.libX11 xorg.libXv xorg.libXrandr zlib 
-            ncurses5 stdenv.cc binutils
-          ];
-
-          packages = with pkgs; [
-            python313
-            python313Packages.pip
-            #python331Packages.venv
-
-            # Build dependencies that may be needed
-            pkg-config
-            cmake
-            ninja
-            gcc
-            mesa
-
-            # System libraries needed for OpenCV and other dependencies
+        devShells.default = let 
+          ld_packages = with pkgs; [
+            stdenv.cc.cc.lib
             zlib
-            stdenv.cc.cc.lib  # Provides libstdc++
             opencv4WithoutCuda # opencv
-
-            # Add these to your packages list if you have an NVIDIA GPU
-            cudaPackages.cuda_cudart
-            # cudaPackages.cuda_runtime
-            cudaPackages.cudatoolkit
+            linuxPackages.nvidia_x11
+            ncurses5
+            mesa
           ];
+          in pkgs.mkShell {
+            buildInputs = with pkgs; [
+              git gitRepo gnupg autoconf curl
+              procps gnumake util-linux m4 gperf unzip
+              cudatoolkit linuxPackages.nvidia_x11
+              libGLU libGL
+              xorg.libXi xorg.libXmu freeglut
+              xorg.libXext xorg.libX11 xorg.libXv xorg.libXrandr zlib 
+              ncurses5 stdenv.cc binutils
+            ];
 
-          shellHook = ''
-            export CUDA_PATH=${pkgs.cudatoolkit}
-            export EXTRA_LDFLAGS="-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib"
-            export EXTRA_CCFLAGS="-I/usr/include"
+            packages = with pkgs; [
+              python313
+              python313Packages.pip
+              #python331Packages.venv
 
-            export LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath [
-              pkgs.stdenv.cc.cc.lib
-              pkgs.zlib
-              pkgs.opencv
-              pkgs.linuxPackages.nvidia_x11
-              pkgs.ncurses5
-            ]}:$LD_LIBRARY_PATH
+              # Build dependencies that may be needed
+              pkg-config
+              cmake
+              ninja
+              gcc
 
-            # Create venv if it doesn't exist
-            if [ ! -d "comfyui_env" ]; then
-              python3 -m venv comfyui_env
-              (
-                source comfyui_env/bin/activate
-                set -x
-                pip install -r requirements.txt
-                pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu128
-              )
-            fi
-            
-            # Activate venv
-            source comfyui_env/bin/activate
-            echo "run:"
-            echo "python main.py"
-          '';
-        };
+              # System libraries needed for OpenCV and other dependencies
+
+              # Add these to your packages list if you have an NVIDIA GPU
+              cudaPackages.cuda_cudart
+              # cudaPackages.cuda_runtime
+              cudaPackages.cudatoolkit
+            ] ++ ld_packages;
+
+            shellHook = ''
+              export CUDA_PATH=${pkgs.cudatoolkit}
+              export EXTRA_LDFLAGS="-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib"
+              export EXTRA_CCFLAGS="-I/usr/include"
+              export LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath ld_packages}:$LD_LIBRARY_PATH
+
+              # Create venv if it doesn't exist
+              if [ ! -d "comfyui_env" ]; then
+                python3 -m venv comfyui_env
+                (
+                  source comfyui_env/bin/activate
+                  set -x
+                  pip install -r requirements.txt
+                  pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu128
+                )
+              fi
+              
+              # Activate venv
+              source comfyui_env/bin/activate
+              echo "run:"
+              echo "python main.py"
+            '';
+          };
       }
     );
 } 
