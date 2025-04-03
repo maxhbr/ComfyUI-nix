@@ -37,6 +37,7 @@
             cmake
             ninja
             gcc
+            mesa
 
             # System libraries needed for OpenCV and other dependencies
             zlib
