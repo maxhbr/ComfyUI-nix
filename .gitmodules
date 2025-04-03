@@ -1,3 +1,15 @@
 [submodule "custom_nodes/ComfyUI_IPAdapter_plus"]
 	path = custom_nodes/ComfyUI_IPAdapter_plus
 	url = https://github.com/cubiq/ComfyUI_IPAdapter_plus
+[submodule "custom_nodes/ComfyUI_ADV_CLIP_emb"]
+	path = custom_nodes/ComfyUI_ADV_CLIP_emb
+	url = https://github.com/BlenderNeko/ComfyUI_ADV_CLIP_emb
+[submodule "custom_nodes/comfyui_controlnet_aux"]
+	path = custom_nodes/comfyui_controlnet_aux
+	url = https://github.com/Fannovel16/comfyui_controlnet_aux
+[submodule "custom_nodes/ComfyUI-Custom-Scripts"]
+	path = custom_nodes/ComfyUI-Custom-Scripts
+	url = https://github.com/pythongosssss/ComfyUI-Custom-Scripts
+[submodule "custom_nodes/Derfuu_ComfyUI_ModdedNodes"]
+	path = custom_nodes/Derfuu_ComfyUI_ModdedNodes
+	url = https://github.com/Derfuu/Derfuu_ComfyUI_ModdedNodes
