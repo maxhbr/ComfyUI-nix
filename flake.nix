@@ -41,7 +41,7 @@
             # System libraries needed for OpenCV and other dependencies
             zlib
             stdenv.cc.cc.lib  # Provides libstdc++
-            opencv
+            opencv4WithoutCuda # opencv
 
             # Add these to your packages list if you have an NVIDIA GPU
             cudaPackages.cuda_cudart
