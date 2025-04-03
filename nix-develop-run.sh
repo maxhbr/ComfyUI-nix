@@ -5,5 +5,5 @@ set -euo pipefail
 cd "$(dirname "$0")"
 while : ; do
   nix develop --command python main.py
-  echo "restart :)
+  echo "restart :)"
 done
