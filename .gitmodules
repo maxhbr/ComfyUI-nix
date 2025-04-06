@@ -22,3 +22,6 @@
 [submodule "custom_nodes/tiled_ksampler"]
 	path = custom_nodes/tiled_ksampler
 	url = https://github.com/FlyingFireCo/tiled_ksampler
+[submodule "custom_nodes/ComfyUI-iTools"]
+	path = custom_nodes/ComfyUI-iTools
+	url = https://github.com/MohammadAboulEla/ComfyUI-iTools
