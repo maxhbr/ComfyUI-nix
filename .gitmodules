@@ -16,3 +16,9 @@
 [submodule "custom_nodes/comfyui-job-iterator"]
 	path = custom_nodes/comfyui-job-iterator
 	url = https://github.com/ali1234/comfyui-job-iterator
+[submodule "custom_nodes/ComfyUI-seamless-tiling"]
+	path = custom_nodes/ComfyUI-seamless-tiling
+	url = https://github.com/spinagon/ComfyUI-seamless-tiling
+[submodule "custom_nodes/tiled_ksampler"]
+	path = custom_nodes/tiled_ksampler
+	url = https://github.com/FlyingFireCo/tiled_ksampler
